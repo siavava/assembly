@@ -5,14 +5,15 @@
 ; Usage (post-compile): ./hello
 section .text
 global _start
-_start:
-  mov edx, len
-  mov ecx, msg
-  mov ebx, 1
-  mov eax, 4
-  int 0x80
-  mov eax, 1
-  int 0x80
+_start:                     ; entrypoint
+  mov edx, len              ; message length
+  mov ecx, msg              ; actual message
+  mov ebx, 1                ; file descriptor (stdout)
+  mov eax, 4                ; system call #4 -> sys_write
+  int 0x80                  ; kernel
+  mov eax, 1                ; system call #1 -> sys_exit
+  int 0x80                  ; kernel
+
 section .data
 msg db 'Hello, world', 0xa
 len equ $ - msg
