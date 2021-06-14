@@ -1,3 +1,8 @@
+; Hello World in Assembly
+;
+; Author: siavava <amittaijoel@outlook.com>
+;
+; Usage (post-compile): ./hello
 section .text
 global _start
 _start:
