@@ -15,5 +15,5 @@ _start:                     ; entrypoint
   int 0x80                  ; kernel
 
 section .data
-msg db 'Hello, world', 0xa
-len equ $ - msg
+msg db 'Hello, world!', 0xa  ; message
+len equ $ - msg             ; message length
