@@ -15,5 +15,5 @@ _start:                     ; entrypoint
   int 0x80                  ; kernel call -> exec $eax
 
 section .data
-msg db 'Hello, world!', 0xa ; message
+msg db 'Hello, World!', 0xa ; message
 len equ $ - msg             ; message len -> (here to start of "msg")
