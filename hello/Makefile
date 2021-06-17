@@ -50,14 +50,13 @@ test:
 	printf "\n\nCleaning up.\n"
 	make clean
 	
-clean:
-	rm -f *.o
-	rm -f hello
-	rm -f helloc
-
 valgrind:
 	make all
 	$(VALGRIND) ./helloc
 	# $(VALGRIND) ./hello
 	make clean
 	
+clean:
+	rm -f *.o
+	rm -f hello
+	rm -f helloc
