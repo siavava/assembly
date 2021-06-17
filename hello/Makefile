@@ -34,10 +34,8 @@ test:
 	make all
 	printf "\n\nTiming run of assembly version.\n"
 	$(timer) ./hello &
-
 	printf "\n\nTiming run of C version.\n"
 	$(timer) ./helloc &
-
 	printf "\n\nCleaning up.\n"
 	make clean
 	
