@@ -56,5 +56,8 @@ clean:
 	rm -f helloc
 
 valgrind:
-	$(VALGRIND) ./hello
+	make all
+	$(VALGRIND) ./helloc
+	# $(VALGRIND) ./hello
+	make clean
 	
