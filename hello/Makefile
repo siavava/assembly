@@ -1,5 +1,3 @@
-# 
-
 # Makefile for Hello World in Assembly
 # 
 # Author: siavava <amittaijoel@outlook.com>
@@ -7,28 +5,41 @@
 # Use bash as default Shell
 SHELL := /bin/bash
 
-# Use NASM as cc for assembly
-CC = nasm
-CFLAGS = -f
+##### Assembler #####
+ASM = nasm
+ASMFLAGS = -f
+ASMFORMAT = elf64
+
+##### Linker #####
+LINKER = ld
+LINKERFLAGS = -s
+
+##### C compiler #####
+CC = gcc
+CFLAGS = -Wall -pedantic
+
+##### Memory tracker #####
 VALGRIND= valgrind --leak-check=full --show-leak-kinds=all
+
+##### Timer #####
 timer = time
 
-all: hello helloc
+##### Programs #####
+ASMPROG = hello
+CPROG = helloc
+
+all: $(ASMPROG) $(CPROG)
 
 hello: hello.o
-	ld -s -o $@ hello.o
+	$(LINKER) $(LINKERFLAGS) hello.o -o $@
 	rm -f hello.o
 
 hello.o: first.asm
-	$(CC) $(CFLAGS) elf64 $^ -o $@
+	$(ASM) $(ASMFLAGS) $(ASMFORMAT) $^ -o $@
 
-clean:
-	rm -f *.o
-	rm -f hello
-	rm -f helloc
 
-helloc:
-	gcc -Wall -pedantic hello.c -o helloc
+helloc: hello.c
+	$(CC) $(CFLAGS) $^ -o $@
 
 test: 
 	make all
@@ -39,6 +50,11 @@ test:
 	printf "\n\nCleaning up.\n"
 	make clean
 	
+clean:
+	rm -f *.o
+	rm -f hello
+	rm -f helloc
+
 valgrind:
 	$(VALGRIND) ./hello
 	
