@@ -34,7 +34,7 @@ hello: hello.o
 	$(LINKER) $(LINKERFLAGS) hello.o -o $@
 	rm -f hello.o
 
-hello.o: first.asm
+hello.o: hello.asm
 	$(ASM) $(ASMFLAGS) $(ASMFORMAT) $^ -o $@
 
 
