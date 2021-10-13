@@ -130,18 +130,18 @@ isDIV:
     
 input: 
     # asking about the decimal number 1234.
-    .byte 0x06                      # bit 1
-    .byte 0x00                      # bit 2
-    .byte 0x00                      # bit 3
-    .byte 0x00                      # bit 4
+    .byte 0x06                      # byte 1
+    .byte 0x00                      # byte 2
+    .byte 0x00                      # byte 3
+    .byte 0x00                      # byte 4
     
 output:
-    .byte 0x00                     # bit 1
-    .byte 0x00                     # bit 21        
-    .byte 0x00                     # bit 3
-    .byte 0x00                     # bit 4
+    .byte 0x00                     # byte 1
+    .byte 0x00                     # byte 2        
+    .byte 0x00                     # byte 3
+    .byte 0x00                     # byte 4
     
-.defl Stack 0x00                   # stack pointer
-.defl passFlag 0x01                # flag for passing div by 6 test
-.defl failFlag 0x00                # flag for failing div by 6 test
-.defl errorNotBCD 0xe              # flag for invalid BCD
+.defl Stack         0x00           # stack pointer
+.defl passFlag      0x01           # flag for passing div by 6 test
+.defl failFlag      0x00           # flag for failing div by 6 test
+.defl errorNotBCD   0x0e           # flag for invalid BCD
