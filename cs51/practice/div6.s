@@ -16,8 +16,8 @@ init:
     
     # call checkBCD -- which sets flag and exits if input not BCD.
     irmovl 0x04, %ecx
-    #addl %ecx, %esp
-    #call CheckBCD
+    addl %ecx, %esp
+    call CheckBCD
     
     #rrmovl %edi, %esi
     
