@@ -6,17 +6,16 @@
 SHELL := /bin/bash
 
 ##### Assembler #####
-ASM = nasm
-ASMFLAGS = -f
-ASMFORMAT = elf64
+ASM = yasm
+ASMFLAGS = -g dwarf2 -f elf64
 
 ##### Linker #####
 LINKER = ld
-LINKERFLAGS = -s
+LINKERFLAGS = -s 
 
 ##### C compiler #####
 CC = gcc
-CFLAGS = -Wall -pedantic
+CFLAGS = -Wall -pedantic --std=c11
 
 ##### Memory tracker #####
 VALGRIND= valgrind --leak-check=full --show-leak-kinds=all
@@ -31,11 +30,14 @@ CPROG = helloc
 all: $(ASMPROG) $(CPROG)
 
 hello: hello.o
-	$(LINKER) $(LINKERFLAGS) hello.o -o $@
+	$(LINKER) $(LINKERFLAGS) $^ -o $@
 	rm -f hello.o
 
 hello.o: hello.asm
-	$(ASM) $(ASMFLAGS) $(ASMFORMAT) $^ -o $@
+	$(ASM) $(ASMFLAGS) $^ -o $@
+
+hello.c.asm: hello.c
+	$(CC) $(CFLAGS) -S $^ -o $@
 
 
 helloc: hello.c
