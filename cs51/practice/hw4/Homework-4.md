@@ -309,4 +309,4 @@ Perform the following bitwise logical operations on 16-bit words. Express your a
 
 ###### **Solution 6**
 
-![Q6](Q6.pdf)
+![Q6](Q6.pdf
