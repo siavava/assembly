@@ -25,7 +25,7 @@ Remember Fig 4.3 and 3.12 are on our cheatsheet.   The "ifun" code is the least 
 
 ###### **Solution 1**
 
-![Circuit Image](./condition-checker.png)
+![Circuit Image](img/condition-checker.png)
 
 ###### **Discussion**
 
@@ -66,10 +66,10 @@ loop:                       # loop:
 
 Suppose that this (little-endian) 4-byte word lives at address "target":
 
-![0](target0.jpg)
+![0](img/target0.jpg)
 Write a subroutine that will get the following into register %eax:
 
-![0](ra0.jpg)
+![0](img/ra0.jpg)
 
 (Essentially, fetch just the least significant byte, with the rest zeros!)
 
@@ -285,7 +285,7 @@ Compare and contrast Q4 above with your circuit implementation for these same pr
 
 ###### **Solution 5**
 
-![Circuit](Q5-circuit.png)
+![Circuit](img/Q5-circuit.png)
 
 In my circuit implementation, I was able to capitalize on divisibility tricks to check if a number is divisible by $3$.
 In particular, a number is divisible by $3$ iff the sum of its digits is also divisible by $3$. However, it was difficult to figure out such a trick in my assembly code (I spent a few hours trying to), and I ended up having a loop that increments a value by 6 each time, checking if it equals the target value or exceeds the target value. If the two values are exactly equal, then the number is divisible. If the incremented one exceeeds the target, then the target value is not divisible by $3$ and we can exit.
@@ -309,4 +309,4 @@ Perform the following bitwise logical operations on 16-bit words. Express your a
 
 ###### **Solution 6**
 
-![Q6](Q6.pdf
+![Q6](img/Q6.pdf
