@@ -13,6 +13,7 @@ _start:                     ; entrypoint
   int 0x80                  ; kernel call -> exec $eax
   mov ax, 1                 ; sys call #1 -> exit
   int 0x80                  ; kernel call -> exec $eax
+  ret
 
 section .data
 msg db 'Hello, World!', 0xa ; message

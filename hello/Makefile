@@ -37,7 +37,7 @@ hello.o: hello.asm
 	$(ASM) $(ASMFLAGS) $^ -o $@
 
 hello.c.asm: hello.c
-	$(CC) $(CFLAGS) -S $^ -o $@
+	$(CC) $(CFLAGS) -S -masm=intel $^ -o $@
 
 
 helloc: hello.c

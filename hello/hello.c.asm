@@ -1,4 +1,5 @@
 	.file	"hello.c"
+	.intel_syntax noprefix
 	.text
 	.section	.rodata
 .LC0:
@@ -9,19 +10,19 @@
 main:
 .LFB0:
 	.cfi_startproc
-	pushq	%rbp
+	push	rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp
+	mov	rbp, rsp
 	.cfi_def_cfa_register 6
-	leaq	.LC0(%rip), %rdi
+	lea	rdi, .LC0[rip]
 	call	puts@PLT
-	movl	$0, %eax
-	popq	%rbp
+	mov	eax, 0
+	pop	rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE0:
 	.size	main, .-main
-	.ident	"GCC: (Debian 10.2.1-6) 10.2.1 20210110"
+	.ident	"GCC: (Debian 10.3.0-11) 10.3.0"
 	.section	.note.GNU-stack,"",@progbits
