@@ -11,15 +11,21 @@ init:
     irmovl $0x7e, %eax      # load value into %eax
     irmovl DDR, %esi        # load DDR address location into %esi
     mrmovl (%esi), %esi     # load DDR into %esi
-loop:
+loop1:
     rmmovl %eax, (%esi)     # print current ASCII letter
     isubl $0x01, %eax       # decrement by one
     irmovl $0x40, %ebx      # load lowest letter into %ebx
     subl %eax, %ebx         # deduct current letter from lowest
-    jle loop                # if lowest <= current, loop.
-    halt
+    jle loop1               # if lowest <= current, loop.
+    
+loop2:
+    rmmovl %eax, (%esi)     # print current ASCII letter
+    iaddl $0x01, %eax       # increment by one
+    irmovl $0x7e, %ebx      # load highest letter into %ebx
+    subl %eax, %ebx         # deduct current letter from highest
+    jge loop2               # if highest >= current, loop.
  
- # IO Addresses
+# IO Addresses
 .pos 0x40
 KBSR:
     .long 0x00fffe00
@@ -30,7 +36,7 @@ DSR:
 DDR:
     .long 0x00fffe0c
     
-    
+# Stack pointer. 
 .pos 0x60
 stack:
     .long 0xffffffff

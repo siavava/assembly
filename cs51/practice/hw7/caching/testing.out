@@ -1,0 +1,91 @@
+SAMPLE.TXT.
+
+
+
+Direct Mapping
+ 1: addr 0x22222210; tag 222010; looking in set 33, miss! line 0 empty, adding there.
+ 2: addr 0x33333310; tag 333010; looking in set 49, miss! line 0 empty, adding there.
+ 3: addr 0x44444410; tag 444010; looking in set 1, miss! line 0 empty, adding there.
+ 4: addr 0x55555510; tag 555010; looking in set 17, miss! line 0 empty, adding there.
+ 5: addr 0x66666610; tag 666010; looking in set 33, miss! line 0 evicted, adding there.
+ 6: addr 0x22222210; tag 222010; looking in set 33, found it in line 1; hit!
+ 7: addr 0x33333310; tag 333010; looking in set 49, found it in line 1; hit!
+ 8: addr 0x8fe01030; tag e01030; looking in set 3, miss! line 0 empty, adding there.
+ 9: addr 0x8fe01031; tag e01031; looking in set 3, miss! line 0 evicted, adding there.
+10: addr 0xbffff8fc; tag fff074; looking in set 15, miss! line 0 empty, adding there.
+2 hits, 8 misses, 10 addresses.
+
+
+
+Two-Way Associative Mapping
+ 1: addr 0x22222210; tag 222010; looking in set 1, miss! line 0 empty, adding there.
+ 2: addr 0x33333310; tag 333010; looking in set 17, miss! line 0 empty, adding there.
+ 3: addr 0x44444410; tag 444010; looking in set 1, miss! line 0 evicted, adding there.
+ 4: addr 0x55555510; tag 555010; looking in set 17, miss! line 0 evicted, adding there.
+ 5: addr 0x66666610; tag 666010; looking in set 1, miss! line 0 evicted, adding there.
+ 6: addr 0x22222210; tag 222010; looking in set 1, found it in line 2; hit!
+ 7: addr 0x33333310; tag 333010; looking in set 17, found it in line 2; hit!
+ 8: addr 0x8fe01030; tag e01030; looking in set 3, miss! line 0 empty, adding there.
+ 9: addr 0x8fe01031; tag e01031; looking in set 3, miss! line 1 evicted, adding there.
+10: addr 0xbffff8fc; tag fff074; looking in set 15, miss! line 0 empty, adding there.
+2 hits, 8 misses, 10 addresses.
+
+
+
+
+Four-Way Associative Mapping
+ 1: addr 0x22222210; tag 222010; looking in set 1, miss! line 0 empty, adding there.
+ 2: addr 0x33333310; tag 333010; looking in set 1, miss! line 0 evicted, adding there.
+ 3: addr 0x44444410; tag 444010; looking in set 1, miss! line 0 evicted, adding there.
+ 4: addr 0x55555510; tag 555010; looking in set 1, miss! line 0 evicted, adding there.
+ 5: addr 0x66666610; tag 666010; looking in set 1, miss! line 0 evicted, adding there.
+ 6: addr 0x22222210; tag 222010; looking in set 1, found it in line 4; hit!
+ 7: addr 0x33333310; tag 333010; looking in set 1, miss! line 0 evicted, adding there.
+ 8: addr 0x8fe01030; tag e01030; looking in set 3, miss! line 0 empty, adding there.
+ 9: addr 0x8fe01031; tag e01031; looking in set 3, miss! line 1 evicted, adding there.
+10: addr 0xbffff8fc; tag fff074; looking in set 15, miss! line 0 empty, adding there.
+1 hits, 9 misses, 10 addresses.
+
+
+
+Fully Associative Mapping
+ 1: addr 0x22222210; tag 222010; looking in set 0, miss! line 16 empty, adding there.
+ 2: addr 0x33333310; tag 333010; looking in set 0, miss! line 16 evicted, adding there.
+ 3: addr 0x44444410; tag 444010; looking in set 0, miss! line 16 evicted, adding there.
+ 4: addr 0x55555510; tag 555010; looking in set 0, miss! line 16 evicted, adding there.
+ 5: addr 0x66666610; tag 666010; looking in set 0, miss! line 16 evicted, adding there.
+ 6: addr 0x22222210; tag 222010; looking in set 0, found it in line 64; hit!
+ 7: addr 0x33333310; tag 333010; looking in set 0, miss! line 16 evicted, adding there.
+ 8: addr 0x8fe01030; tag e01030; looking in set 0, miss! line 48 evicted, adding there.
+ 9: addr 0x8fe01031; tag e01031; looking in set 0, miss! line 49 evicted, adding there.
+10: addr 0xbffff8fc; tag fff074; looking in set 0, miss! line 52 evicted, adding there.
+1 hits, 9 misses, 10 addresses.
+
+
+
+--------------------------------
+
+LONG-TRACE.TXT
+
+
+
+Direct Mapping
+6026 hits, 6340052 misses, 6346078 addresses.
+
+
+
+Two-Way Associative Mapping
+5687 hits, 6340391 misses, 6346078 addresses.
+
+
+
+
+Four-Way Associative Mapping
+3629 hits, 6342449 misses, 6346078 addresses.
+
+
+
+Fully Associative Mapping
+0 hits, 6346078 misses, 6346078 addresses.
+
+

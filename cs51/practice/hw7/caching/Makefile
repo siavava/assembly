@@ -13,22 +13,13 @@ $(PROG:) : $(PROG).cpp
 	$(CC) $(CFLAGS) -o $@ $<
 
 test: $(PROG)
-	# ./$(PROG) ./data/sample.txt 0
-	# ./$(PROG) ./data/sample.txt 1
-	# ./$(PROG) ./data/sample.txt 2
-	# ./$(PROG) ./data/sample.txt 3
-
-	./$(PROG) ./data/long-trace.txt 3
+	./testing.sh
 
 valgrind: $(PROG)
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(PROG) ./data/sample.txt 1
 
-quicktest: $(PROG).cpp
-	$(CC) $(CFLAGS) -o $(PROG) $< -DVERBOSE
-	./$(PROG) ./data/sample.txt 0
-	./$(PROG) ./data/sample.txt 1
-	./$(PROG) ./data/sample.txt 2
-	./$(PROG) ./data/sample.txt 3
+verbose: $(PROG).cpp
+	$(CC) $(CFLAGS) $< -DVERBOSE -o $(PROG)
 
 clean:
 	rm -f $(PROG)

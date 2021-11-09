@@ -1038,12 +1038,12 @@
       <a name="contents">addr/data: 10 8
 30 f4 60 0 0 0 30 f0
 7e 0 0 0 30 f6 4c 0
-0 0 50 66 4*0 40 6 4*0
-c1 f0 1 0 0 0 30 f3
-40 0 0 0 61 3 71 18
-19*0 fe ff 0 4 fe ff 0
-8 fe ff 0 c fe ff 17*0
-4*ff
+0 0 50 66 4*0 30 f0 3f
+0 0 0 c0 f0 1 0 0
+0 40 6 4*0 30 f3 7e 0
+0 0 61 3 75 1e 13*0 fe
+ff 0 4 fe ff 0 8 fe
+ff 0 c fe ff 17*0 4*ff
 </a>
     </comp>
     <comp lib="4" loc="(1690,770)" name="RAM">

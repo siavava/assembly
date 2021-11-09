@@ -15,26 +15,26 @@
 using namespace std;
 
 /* GLOBAL VARIABLES */
-const unsigned long TAGMASK = 0xfffffc00;   // mask for the tag bits
-const unsigned long SETMASK = 0x000003f;   // mask for the set bits
+const unsigned int TAGMASK = 0x00fff077;   // mask for the tag bits
+const unsigned int SETMASK = 0x000003f0;    // mask for the set bits
 const int NUM_LINES = 64;                   // total number of lines implemented.
 const int LINE_SIZE = 16;                   // size of each line in bytes
 
 typedef struct _set {
-  unsigned long int addr;     /* address of the current set */
-  bool* valid;               /* valid bit for each line */  
+  unsigned int addr;          /* address of the current set */
+  bool* valid;                /* valid bit for each line */  
   // void** lines;            /* lines of data */
-  unsigned long int* tags;   /* tags for each line */
-  int* lastAccessed;         /* last accessed time for each line */
+  unsigned int* tags;         /* tags for each line */
+  int* lastAccessed;          /* last accessed time for each line */
 } set;
 
 class Cache {
   public:
     Cache(int);
-    // ~Cache();
+    ~Cache();
 
     int hits, misses;
-    void read(unsigned long int, int);
+    void read(unsigned int, int);
   private:
     /* 
       NOTE: The cache holds _numSets sets, 
@@ -62,31 +62,31 @@ Cache::Cache(int associativity) {
 
   switch (associativity) {
     case 0: {
-      cout << "Direct Mapping" << endl;
+      cout << "\nDirect Mapping" << endl;
       _numSets = NUM_LINES;
       _blockSize = 1;
       break;
     }
     case 1: {
-      cout << "Two-Way Associative Mapping" << endl;
+      cout << "\nTwo-Way Associative Mapping" << endl;
       _numSets = NUM_LINES / 2;
       _blockSize = 2;
       break;
     }
     case 2: {
-      cout << "Four-Way Associative Mapping" << endl;
+      cout << "\n\nFour-Way Associative Mapping" << endl;
       _numSets = NUM_LINES / 4;
       _blockSize = 4;
       break;
     }
     case 3: {
-      cout << "Fully Associative Mapping" << endl;
+      cout << "\nFully Associative Mapping" << endl;
       _numSets = 1;
       _blockSize = NUM_LINES;
       break;
     }
     default:
-      cout << "Unknown scheme, not yet implemented." << endl;
+      cout << "\nUnknown scheme, not yet implemented." << endl;
       exit(1);
     }
 
@@ -97,7 +97,7 @@ Cache::Cache(int associativity) {
     _sets[i] = new set;
     _sets[i]->valid = new bool[_blockSize];
     _sets[i]->lastAccessed = new int[_blockSize];
-    _sets[i]->tags = new unsigned long int[_blockSize];
+    _sets[i]->tags = new unsigned int[_blockSize];
     // _sets[i]->lines = new char*[_blockSize];
     for (int j = 0; j < _blockSize; j++) {
       _sets[i]->valid[j] = false;
@@ -108,17 +108,30 @@ Cache::Cache(int associativity) {
   }
 }
 
+/**
+ * @brief Destructs a Cache object
+ */
+Cache::~Cache() {
+  for (int i = 0; i < _numSets; i++) {
+    delete[] _sets[i]->valid;
+    delete[] _sets[i]->tags;
+    delete[] _sets[i]->lastAccessed;
+    // delete[] _sets[i]->lines;
+    delete _sets[i];
+  }
+  delete[] _sets;
+}
+
+
 void 
-Cache::read(unsigned long int address, int time)
+Cache::read(unsigned int address, int time)
 {
   // unsigned long int original_tag = address & TAGMASK;
   // unsigned long int original_set = address & SETMASK;
-  unsigned long int original_tag = address & 0xfff077;
-  unsigned long int original_set = (address & 0x000003f0) >> 4;
+  unsigned int original_tag = address & TAGMASK;
+  unsigned int original_set = (address & SETMASK) >> 4;
   int tagAddr = original_tag % _blockSize;   /* compute tag mask, limit to the number of lines per set */
   int setAddr = original_set % _numSets;     /* compute set mask, limit to the number of sets */
-
-  // printf("\nset address = %d\n original tag = %08x, mask = %d\n\n", setAddr, original_tag, tagAddr);
 
   /* fetch the target set */
   set* targetSet = _sets[setAddr];
@@ -161,10 +174,11 @@ Cache::read(unsigned long int address, int time)
   misses++;
   if (lastAccess == 0) {
 
-  #ifdef VERBOSE
+#ifdef VERBOSE
     printf("%2d: addr 0x%x; tag %x; looking in set %d, miss! line %d empty, adding there.\n", \
     time, address, original_tag, setAddr, tagAddr);
-  #endif
+#endif
+
     targetSet->tags[lastAccessedIndex] = address;
     targetSet->lastAccessed[lastAccessedIndex] = time;
     targetSet->valid[lastAccessedIndex] = true;
@@ -191,7 +205,7 @@ main(int argc, const char* argv[])
   if ((fp = fopen(argv[1], "r")) == NULL) {
     cout << "Error opening file" 
          << argv[1] 
-         << "\nPlease make sure you have the correct path & permissions!" 
+         << "\nPlease make sure you have the correct path & permissions." 
          << endl;
     exit(1);
   }
@@ -200,7 +214,7 @@ main(int argc, const char* argv[])
   Cache cache = Cache(associativity);
 
   char c; 
-  unsigned long int n;
+  unsigned int n;
 
   int time = 0;
 
@@ -230,7 +244,7 @@ main(int argc, const char* argv[])
   }
   fclose(fp);
 
-  printf("%d hits, %d misses, %d addresses.\n", cache.hits, cache.misses, time);
+  printf("%d hits, %d misses, %d addresses.\n\n\n", cache.hits, cache.misses, time);
 
   return 0;
 }
