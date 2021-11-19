@@ -1,0 +1,14 @@
+
+# if running this on a LogiSim Y86,
+# replace this constant with an address
+# near the top of your RAM
+.defl stack 0x04FC
+
+irmovl stack, %esp
+sysexit
+halt
+
+.pos 0x100
+trap:
+    ret
+    
