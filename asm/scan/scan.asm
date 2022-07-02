@@ -32,6 +32,7 @@ exit:
   mov ebx, 0
   int 80h
 
+
 section .data
   msg           db 'Here is a string with a single recurring character, Q, and some more text', 0
   len           equ $ - msg
